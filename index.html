@@ -6,6 +6,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" /> 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script> 
 
+    <style>
+        body {
+            margin: auto;
+            max-width: 800px;
+        }
+
+    </style>
+
     <script>
 
         //Values for Info Domain FP calculator
@@ -15,11 +23,23 @@
             inquiries : [3, 4, 6],
             files : [7, 10, 15],
             externals : [5, 7, 10]
-        }
+        };
+
+        const languagePoints = {
+            c : [2.5, 125],
+            c_plusplus : [6, 53],
+            c_sharp : [6, 54],
+            java : [6, 53],
+            python : [6, 53],
+            php : [5, 67],
+            assembly : [1, 320],
+            sql : [25, 13],
+            vb6 : [13, 22]            
+        };
 
         $(document).ready(function() {
             //Attach functionality to numerical changes
-            $("[id^=fp_num_").change(function() {
+            $("[id^=fp_num_]").change(function() {
                 var parameterType = $(this).attr("id").split("fp_num_")[1];
                 var parameterValue = $(this).val();
                 var currentComplexity = parseInt($("input[name='fp_level']:checked").val());
@@ -33,15 +53,31 @@
                 $("[id^=fp_num").trigger("change");
                 updateTotal();
             });
+
+            $("[id^=lang_]").click(function() {
+                var language = $(".lang_choice:checked").attr("id").split("lang_")[1];
+
+                $("#langresult_level").val(languagePoints[language][0]);                
+                $("#langresult_loc").val(languagePoints[language][1]);                
+                updateTotal();
+            });
         });
 
         function updateTotal() {
+            //FP for info calc
             var totalSum = 0;
             $(".fp_total").each(function() {
                 totalSum += parseInt(this.value);
             });            
 
             $("#fp_grand_total").val(totalSum);
+
+            //LOC/FP calc
+
+            var level = parseInt($("#langresult_level").val());
+            var loc = parseInt($("#langresult_loc").val());
+
+            $("#langresult_locfp").val(loc * totalSum);
         }
 
     </script>
@@ -51,7 +87,7 @@
     <h1>Metric Modeller</h1>
 
     <form>
-        <fieldset>
+        <fieldset class="mb-5">
         <legend>Function Points for Info Domain Values</legend>
         <table class="table-bordered">
             <thead>
@@ -123,7 +159,59 @@
         </fieldset>
 
         <fieldset>
-            
+            <legend>Language Choice</legend>
+            <div class="radio">
+                <input type="radio" checked id="lang_c" name="lang_choice" class="lang_choice">
+                <label for="lang_c">C</label>
+            </div>
+            <div class="radio">    
+                <input type="radio" id="lang_c_plusplus" name="lang_choice" class="lang_choice">
+                <label for="lang_c_plusplus">C++</label>
+            </div>
+            <div class="radio">    
+                <input type="radio" id="lang_c_sharp" name="lang_choice" class="lang_choice">
+                <label for="lang_c_sharp">C#</label>
+            </div>
+            <div class="radio">    
+                <input type="radio" id="lang_java" name="lang_choice" class="lang_choice">
+                <label for="lang_java">Java</label>
+            </div>
+            <div class="radio">    
+                <input type="radio" id="lang_pyth" name="lang_choice" class="lang_choice">
+                <label for="lang_python">Python</label>
+            </div>
+            <div class="radio">    
+                <input type="radio" id="lang_php" name="lang_choice" class="lang_choice">
+                <label for="lang_php">PHP</label>
+            </div>
+            <div class="radio">    
+                <input type="radio" id="lang_assembly" name="lang_choice" class="lang_choice">
+                <label for="lang_assembly">Assembly</label>
+            </div>
+            <div class="radio">    
+                <input type="radio" id="lang_sql" name="lang_choice" class="lang_choice">
+                <label for="lang_sql">SQL</label>
+            </div>
+            <div class="radio">    
+                <input type="radio" id="lang_vb6" name="lang_choice" class="lang_choice">
+                <label for="lang_vb6">VisualBasic 6</label>
+            </div>
+
+            <div class="form-row">
+                <div class="col">
+                    <label for="langresult_level">Language Level</label>
+                    <input type="text" name="langresult_level" readonly id="langresult_level" />        
+                </div>
+                <div class="col">
+                    <label for="langresult_loc">Language Average LoC</label>
+                    <input type="text" name="langresult_loc" readonly id="langresult_loc" />
+                </div>
+                <div class="col">
+                    <label for="langresult_locfp">Estimated Project LoC</label>
+                    <input type="text" name="langresult_locfp" readonly id="langresult_locfp" />
+                </div>
+              </div>
+
         </fieldset>
 
 
