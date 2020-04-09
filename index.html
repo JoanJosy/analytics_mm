@@ -8,7 +8,8 @@
 
     <script>
 
-        const complexityTable = {
+        //Values for Info Domain FP calculator
+        const idfpComplexityTable = {
             inputs : [3, 4, 6],
             outputs : [4, 5, 7],
             inquiries : [3, 4, 6],
@@ -17,11 +18,12 @@
         }
 
         $(document).ready(function() {
-            $("[id^=fp_num").change(function() {
+            //Attach functionality to numerical changes
+            $("[id^=fp_num_").change(function() {
                 var parameterType = $(this).attr("id").split("fp_num_")[1];
                 var parameterValue = $(this).val();
                 var currentComplexity = parseInt($("input[name='fp_level']:checked").val());
-                $("#fp_num_" + parameterType + "_total").val(parameterValue * complexityTable[parameterType][currentComplexity]);
+                $("#fp_" + parameterType + "_total").val(parameterValue * idfpComplexityTable[parameterType][currentComplexity]);
 
                 updateTotal();
             });
@@ -38,6 +40,7 @@
             $(".fp_total").each(function() {
                 totalSum += parseInt(this.value);
             });            
+
             $("#fp_grand_total").val(totalSum);
         }
 
@@ -77,7 +80,7 @@
                     <td class="text-center">x3</td>
                     <td class="text-center">x4</td>
                     <td class="text-center">x6</td>
-                    <td><input id="fp_num_inputs_total" value="0" class="fp_total" readonly type="text" min="0" /></td>
+                    <td><input id="fp_inputs_total" value="0" class="fp_total text-center" readonly type="text" min="0" /></td>
                 </tr>
                 <tr>
                     <td># user outputs</td>
@@ -85,7 +88,7 @@
                     <td class="text-center">x4</td>
                     <td class="text-center">x5</td>
                     <td class="text-center">x7</td>
-                    <td><input id="fp_num_outputs_total" value="0" class="fp_total" readonly type="text" min="0" /></td>
+                    <td><input id="fp_outputs_total" value="0" class="fp_total text-center" readonly type="text" min="0" /></td>
                 </tr>
                 <tr>
                     <td># user inquiries</td>
@@ -93,7 +96,7 @@
                     <td class="text-center">x3</td>
                     <td class="text-center">x4</td>
                     <td class="text-center">x6</td>
-                    <td><input id="fp_num_inquiries_total" value="0" class="fp_total" readonly type="text" min="0" /></td>
+                    <td><input id="fp_inquiries_total" value="0" class="fp_total text-center" readonly type="text" min="0" /></td>
                 </tr>
                 <tr>
                     <td># files</td>
@@ -101,7 +104,7 @@
                     <td class="text-center">x7</td>
                     <td class="text-center">x10</td>
                     <td class="text-center">x15</td>
-                    <td><input id="fp_num_files_total" value="0" class="fp_total" readonly type="text" min="0" /></td>
+                    <td><input id="fp_files_total" value="0" class="fp_total text-center" readonly type="text" min="0" /></td>
                 </tr>
                 <tr>
                     <td># external interfaces</td>
@@ -109,11 +112,11 @@
                     <td class="text-center">x5</td>
                     <td class="text-center">x7</td>
                     <td class="text-center">x10</td>
-                    <td><input id="fp_num_externals_total" value="0" class="fp_total" readonly type="text" min="0" /></td>
+                    <td><input id="fp_externals_total" value="0" class="fp_total text-center" readonly type="text" min="0" /></td>
                 </tr>
                 <tr>
                     <td colspan="5">Total:</td>
-                    <td><input id="fp_grand_total" type="number" readonly min="0"></td>
+                    <td><input id="fp_grand_total" class="text-center" type="text" readonly min="0"></td>
                 </tr>
             </tbody>
         </table>
