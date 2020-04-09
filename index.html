@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>Metric Modeller</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" /> 
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script> 
+
+    <script>
+
+        const complexityTable = {
+            inputs : [3, 4, 6],
+            outputs : [4, 5, 7],
+            inquiries : [3, 4, 6],
+            files : [7, 10, 15],
+            externals : [5, 7, 10]
+        }
+
+        $(document).ready(function() {
+            $("[id^=fp_num").change(function() {
+                var parameterType = $(this).attr("id").split("fp_num_")[1];
+                var parameterValue = $(this).val();
+                var currentComplexity = parseInt($("input[name='fp_level']:checked").val());
+                $("#fp_num_" + parameterType + "_total").val(parameterValue * complexityTable[parameterType][currentComplexity]);
+
+                updateTotal();
+            });
+
+            
+            $(".fp_level").click(function() {
+                $("[id^=fp_num").trigger("change");
+                updateTotal();
+            });
+        });
+
+        function updateTotal() {
+            var totalSum = 0;
+            $(".fp_total").each(function() {
+                totalSum += parseInt(this.value);
+            });            
+            $("#fp_grand_total").val(totalSum);
+        }
+
+    </script>
+
+</head>
+<body>
+    <h1>Metric Modeller</h1>
+
+    <form>
+        <fieldset>
+        <legend>Function Points for Info Domain Values</legend>
+        <table class="table-bordered">
+            <thead>
+                <tr>
+                    <th class="text-center">Parameter</th>
+                    <th class="text-center">Count</th>
+                    <th class="text-center">
+                        <label for="fp_simple">Simple</label>
+                        <input id="fp_simple" class="fp_level" checked name="fp_level" value="0" type="radio" />
+                    </th>
+                    <th class="text-center">
+                        <label for="fp_average">Average</label>
+                        <input id="fp_average" class="fp_level" name="fp_level" value="1" type="radio" />
+                    </th>
+                    <th class="text-center">
+                        <label for="fp_complex">Complex</label>
+                        <input id="fp_complex" class="fp_level" name="fp_level" value="2" type="radio" />
+                    </th>
+                    <th class="text-center">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td># user inputs</td>
+                    <td><input id="fp_num_inputs" type="number" min="0" value="0" /></td>
+                    <td class="text-center">x3</td>
+                    <td class="text-center">x4</td>
+                    <td class="text-center">x6</td>
+                    <td><input id="fp_num_inputs_total" value="0" class="fp_total" readonly type="text" min="0" /></td>
+                </tr>
+                <tr>
+                    <td># user outputs</td>
+                    <td><input id="fp_num_outputs" type="number" min="0" value="0" /></td>
+                    <td class="text-center">x4</td>
+                    <td class="text-center">x5</td>
+                    <td class="text-center">x7</td>
+                    <td><input id="fp_num_outputs_total" value="0" class="fp_total" readonly type="text" min="0" /></td>
+                </tr>
+                <tr>
+                    <td># user inquiries</td>
+                    <td><input id="fp_num_inquiries" type="number" min="0" value="0" /></td>
+                    <td class="text-center">x3</td>
+                    <td class="text-center">x4</td>
+                    <td class="text-center">x6</td>
+                    <td><input id="fp_num_inquiries_total" value="0" class="fp_total" readonly type="text" min="0" /></td>
+                </tr>
+                <tr>
+                    <td># files</td>
+                    <td><input id="fp_num_files" type="number" min="0" value="0" /></td>
+                    <td class="text-center">x7</td>
+                    <td class="text-center">x10</td>
+                    <td class="text-center">x15</td>
+                    <td><input id="fp_num_files_total" value="0" class="fp_total" readonly type="text" min="0" /></td>
+                </tr>
+                <tr>
+                    <td># external interfaces</td>
+                    <td><input id="fp_num_externals" type="number" min="0" value="0" /></td>
+                    <td class="text-center">x5</td>
+                    <td class="text-center">x7</td>
+                    <td class="text-center">x10</td>
+                    <td><input id="fp_num_externals_total" value="0" class="fp_total" readonly type="text" min="0" /></td>
+                </tr>
+                <tr>
+                    <td colspan="5">Total:</td>
+                    <td><input id="fp_grand_total" type="number" readonly min="0"></td>
+                </tr>
+            </tbody>
+        </table>
+        </fieldset>
+
+        <fieldset>
+            
+        </fieldset>
+
+
+
+
+    </form>
+
+
+</body>
+</html>
