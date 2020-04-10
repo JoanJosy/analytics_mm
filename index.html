@@ -85,6 +85,33 @@
 			})
 			
 			$("#lang_c").click()
+            
+            $('#btn_result').click(function (){
+                getCheckedBoxes();
+                
+            });
+        var getCheckedBoxes = function () {
+            var intResult = 0;
+            var q1 = parseInt($('input[name="q1"]:checked').val());
+            var q2 = parseInt($('input[name="q2"]:checked').val());
+            var q3 = parseInt($('input[name="q3"]:checked').val());
+            var q4 = parseInt($('input[name="q4"]:checked').val());
+            var q5 = parseInt($('input[name="q5"]:checked').val());
+            var q6 = parseInt($('input[name="q6"]:checked').val());
+            var q7 = parseInt($('input[name="q7"]:checked').val());
+            var q8 = parseInt($('input[name="q8"]:checked').val());
+            var q9 = parseInt($('input[name="q9"]:checked').val());
+            var q10 = parseInt($('input[name="q10"]:checked').val());
+            var q11 = parseInt($('input[name="q11"]:checked').val());
+            var q12 = parseInt($('input[name="q12"]:checked').val());
+            var q13 = parseInt($('input[name="q13"]:checked').val());
+            var q14 = parseInt($('input[name="q14"]:checked').val());
+            intResult = q1 + q2 + q3 + q4 + q5 + q6 + q7 + q8 + q9 + q10 + q11 + q12 + q13 + q14;
+            $('#tbl_result').html(intResult);
+        }
+
+
+
         });
 
         function updateTotal() {
@@ -181,6 +208,374 @@
             </tbody>
         </table>
         </fieldset>
+
+        <div>
+            <h2>Step 2</h2>
+            <p>You have to find the complexity adjustment values based on responses to the questions below:</p>
+            <h3>Complexity Weighting Factors:</h3>
+            <p>0 = No influence,   1 = Incidental,   2 = Moderate,   3 = Average,   4 = Significant,   5 = Essential</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            Question
+                        </th>
+                        <th>
+                            0
+                        </th>
+                        <th>
+                            1
+                        </th>
+                        <th>
+                            2
+                        </th>
+                        <th>
+                            3
+                        </th>
+                        <th>
+                            4
+                        </th>
+                        <th>
+                            5
+                        </th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>
+                            1. Does the system require reliable backup and recovery?
+                        </td>
+                        <td>
+                            <input type="radio" id="q1_0" name="q1" value="0">
+                        </td>
+                        <td>
+                            <input type="radio" id="q1_1" name="q1" value="1">
+                        </td>
+                        <td>
+                            <input type="radio" id="q1_2" name="q1" value="2">
+                        </td>
+                        <td>
+                            <input type="radio" id="q1_3" name="q1" value="3">
+                        </td>
+                        <td>
+                            <input type="radio" id="q1_4" name="q1" value="4">
+                        </td>
+                        <td>
+                            <input type="radio" id="q1_5" name="q1" value="5">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            2. Are data communications required?
+                        </td>
+                        <td>
+                            <input type="radio" id="q2_0" name="q2" value="0">
+                        </td>
+                        <td>
+                            <input type="radio" id="q2_1" name="q2" value="1">
+                        </td>
+                        <td>
+                            <input type="radio" id="q2_2" name="q2" value="2">
+                        </td>
+                        <td>
+                            <input type="radio" id="q2_3" name="q2" value="3">
+                        </td>
+                        <td>
+                            <input type="radio" id="q2_4" name="q2" value="4">
+                        </td>
+                        <td>
+                            <input type="radio" id="q2_5" name="q2" value="5">
+                        </td>
+                    <tr>
+                        <tr>
+                        <td>
+                            3. Are there distributed processing functions?
+                        </td>
+                        <td>
+                            <input type="radio" id="q3_0" name="q3" value="0">
+                        </td>
+                        <td>
+                            <input type="radio" id="q3_1" name="q3" value="1">
+                        </td>
+                        <td>
+                            <input type="radio" id="q3_2" name="q3" value="2">
+                        </td>
+                        <td>
+                            <input type="radio" id="q3_3" name="q3" value="3">
+                        </td>
+                        <td>
+                            <input type="radio" id="q3_4" name="q3" value="4">
+                        </td>
+                        <td>
+                            <input type="radio" id="q3_5" name="q3" value="5">
+                        </td>
+                    <tr>
+                    <tr>
+                        <td>
+                            4. Is performance critical?
+                        </td>
+                        <td>
+                            <input type="radio" id="q4_0" name="q4" value="0">
+                        </td>
+                        <td>
+                            <input type="radio" id="q4_1" name="q4" value="1">
+                        </td>
+                        <td>
+                            <input type="radio" id="q4_2" name="q4" value="2">
+                        </td>
+                        <td>
+                            <input type="radio" id="q4_3" name="q4" value="3">
+                        </td>
+                        <td>
+                            <input type="radio" id="q4_4" name="q4" value="4">
+                        </td>
+                        <td>
+                            <input type="radio" id="q4_5" name="q4" value="5">
+                        </td>
+                    <tr>
+                    <tr>
+                        <td>
+                            5. Will the system run in an existing, heavily utilized operational environment?
+                        </td>
+                        <td>
+                            <input type="radio" id="q5_0" name="q5" value="0">
+                        </td>
+                        <td>
+                            <input type="radio" id="q5_1" name="q5" value="1">
+                        </td>
+                        <td>
+                            <input type="radio" id="q5_2" name="q5" value="2">
+                        </td>
+                        <td>
+                            <input type="radio" id="q5_3" name="q5" value="3">
+                        </td>
+                        <td>
+                            <input type="radio" id="q5_4" name="q5" value="4">
+                        </td>
+                        <td>
+                            <input type="radio" id="q5_5" name="q5" value="5">
+                        </td>
+                    <tr>
+                        <tr>
+                        <td>
+                            6. Does the system require on-line data entry?
+                        </td>
+                        <td>
+                            <input type="radio" id="q6_0" name="q6" value="0">
+                        </td>
+                        <td>
+                            <input type="radio" id="q6_1" name="q6" value="1">
+                        </td>
+                        <td>
+                            <input type="radio" id="q6_2" name="q6" value="2">
+                        </td>
+                        <td>
+                            <input type="radio" id="q6_3" name="q6" value="3">
+                        </td>
+                        <td>
+                            <input type="radio" id="q6_4" name="q6" value="4">
+                        </td>
+                        <td>
+                            <input type="radio" id="q6_5" name="q6" value="5">
+                        </td>
+                    <tr>
+                        <tr>
+                        <td>
+                            7. Does the on-line data entry require the input transaction to be built over multiple screens or operations?	
+                        </td>
+                        <td>
+                            <input type="radio" id="q7_0" name="q7" value="0">
+                        </td>
+                        <td>
+                            <input type="radio" id="q7_1" name="q7" value="1">
+                        </td>
+                        <td>
+                            <input type="radio" id="q7_2" name="q7" value="2">
+                        </td>
+                        <td>
+                            <input type="radio" id="q7_3" name="q7" value="3">
+                        </td>
+                        <td>
+                            <input type="radio" id="q7_4" name="q7" value="4">
+                        </td>
+                        <td>
+                            <input type="radio" id="q7_5" name="q7" value="5">
+                        </td>
+                    <tr>
+                        <tr>
+                        <td>
+                            8. Are the master file updated on-line?
+                        </td>
+                        <td>
+                            <input type="radio" id="q8_0" name="q8" value="0">
+                        </td>
+                        <td>
+                            <input type="radio" id="q8_1" name="q8" value="1">
+                        </td>
+                        <td>
+                            <input type="radio" id="q8_2" name="q8" value="2">
+                        </td>
+                        <td>
+                            <input type="radio" id="q8_3" name="q8" value="3">
+                        </td>
+                        <td>
+                            <input type="radio" id="q8_4" name="q8" value="4">
+                        </td>
+                        <td>
+                            <input type="radio" id="q8_5" name="q8" value="5">
+                        </td>
+                    <tr>
+                        <tr>
+                        <td>
+                            9. Are the inputs, outputs, files, or inquiries complex?
+                        </td>
+                        <td>
+                            <input type="radio" id="q9_0" name="q9" value="0">
+                        </td>
+                        <td>
+                            <input type="radio" id="q9_1" name="q9" value="1">
+                        </td>
+                        <td>
+                            <input type="radio" id="q9_2" name="q9" value="2">
+                        </td>
+                        <td>
+                            <input type="radio" id="q9_3" name="q9" value="3">
+                        </td>
+                        <td>
+                            <input type="radio" id="q9_4" name="q9" value="4">
+                        </td>
+                        <td>
+                            <input type="radio" id="q9_5" name="q9" value="5">
+                        </td>
+                    <tr>
+                        <tr>
+                        <td>
+                            10. Is the internal processing complex?
+                        </td>
+                        <td>
+                            <input type="radio" id="q10_0" name="q10" value="0">
+                        </td>
+                        <td>
+                            <input type="radio" id="q10_1" name="q10" value="1">
+                        </td>
+                        <td>
+                            <input type="radio" id="q10_2" name="q10" value="2">
+                        </td>
+                        <td>
+                            <input type="radio" id="q10_3" name="q10" value="3">
+                        </td>
+                        <td>
+                            <input type="radio" id="q10_4" name="q10" value="4">
+                        </td>
+                        <td>
+                            <input type="radio" id="q10_5" name="q10" value="5">
+                        </td>
+                        <tr>
+                            <td>
+                                11. In the code designed to be reusable?
+                            </td>
+                            <td>
+                                <input type="radio" id="q11_0" name="q11" value="0">
+                            </td>
+                            <td>
+                                <input type="radio" id="q11_1" name="q11" value="1">
+                            </td>
+                            <td>
+                                <input type="radio" id="q11_2" name="q11" value="2">
+                            </td>
+                            <td>
+                                <input type="radio" id="q11_3" name="q11" value="3">
+                            </td>
+                            <td>
+                                <input type="radio" id="q11_4" name="q11" value="4">
+                            </td>
+                            <td>
+                                <input type="radio" id="q11_5" name="q11" value="5">
+                            </td>
+                         <tr>
+                        <td>
+                            12. Are conversion and installation included in the design?
+                        </td>
+                        <td>
+                            <input type="radio" id="q12_0" name="q12" value="0">
+                        </td>
+                        <td>
+                            <input type="radio" id="q12_1" name="q12" value="1">
+                        </td>
+                        <td>
+                            <input type="radio" id="q12_2" name="q12" value="2">
+                        </td>
+                        <td>
+                            <input type="radio" id="q12_3" name="q12" value="3">
+                        </td>
+                        <td>
+                            <input type="radio" id="q12_4" name="q12" value="4">
+                        </td>
+                        <td>
+                            <input type="radio" id="q12_5" name="q12" value="5">
+                        </td>
+                     <tr>
+                        <td>
+                            13. Is the system designed for multiple installations in different organizations?
+                        </td>
+                        <td>
+                            <input type="radio" id="q13_0" name="q13" value="0">
+                        </td>
+                        <td>
+                            <input type="radio" id="q13_1" name="q13" value="1">
+                        </td>
+                        <td>
+                            <input type="radio" id="q13_2" name="q13" value="2">
+                        </td>
+                        <td>
+                            <input type="radio" id="q13_3" name="q13" value="3">
+                        </td>
+                        <td>
+                            <input type="radio" id="q13_4" name="q13" value="4">
+                        </td>
+                        <td>
+                            <input type="radio" id="q13_5" name="q13" value="5">
+                        </td>
+                     <tr>
+                        <td>
+                            Is the application designed to facilitate change and ease of use by the user?
+                        </td>
+                        <td>
+                            <input type="radio" id="q14_0" name="q14" value="0">
+                        </td>
+                        <td>
+                            <input type="radio" id="q14_1" name="q14" value="1">
+                        </td>
+                        <td>
+                            <input type="radio" id="q14_2" name="q14" value="2">
+                        </td>
+                        <td>
+                            <input type="radio" id="q14_3" name="q14" value="3">
+                        </td>
+                        <td>
+                            <input type="radio" id="q14_4" name="q14" value="4">
+                        </td>
+                        <td>
+                            <input type="radio" id="q14_5" name="q14" value="5">
+                        </td>
+                    <tr>
+                        <td>
+                            Result 
+                        </td>
+                        <td id="tbl_result">
+                            
+                        </td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+            <input type="button" name="btn_result" id="btn_result" value="Calculate" type="submit" />
+        </div>
+
+        <br/>
+        <br/>
 
         <fieldset class="mb-5">
             <legend>Language Choice</legend>
