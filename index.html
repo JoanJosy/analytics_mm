@@ -12,6 +12,10 @@
             max-width: 800px;
         }
 
+        input:read-only {
+            background-color: palegoldenrod;
+        }
+
     </style>
 
     <script>
@@ -63,10 +67,22 @@
             $("[id^=lang_]").click(function() {
                 var language = $(".lang_choice:checked").attr("id").split("lang_")[1];
 
-                $("#langresult_level").val(languagePoints[language][0]);                
-                $("#langresult_loc").val(languagePoints[language][1]);                
+                if (!$("#extra_language").is(":checked")) {
+                    $("#langresult_level, #langresult_loc").attr("readonly", true);
+                    $("#langresult_level").val(languagePoints[language][0]);                
+                    $("#langresult_loc").val(languagePoints[language][1]);                
+                }
+
                 updateTotal();
             });
+
+            $("#extra_language").click(function() {
+                if ($("#extra_language").is(":checked")) {
+                    $("#langresult_level, #langresult_loc").attr("readonly", false);
+                }
+            });
+
+
 			
 			$("[id^=complexity_input_]").click(function(){
 				updateTotal();
@@ -82,7 +98,11 @@
 				
 				$("#effort_level").val(effort.toFixed(2));
 				$("#estimate_duration").val(duration.toFixed(2));
-			})
+            });
+            
+            $("#langresult_level, #langresult_loc").on("change", function () {
+                updateTotal();
+            })
 			
 			$("#questionTable input").change(function(){
 				getCheckedBoxes();
@@ -91,12 +111,7 @@
 			$("#lang_c").click()
             
             getCheckedBoxes();
-                
-            
         
-
-
-
         });
 		
 		var getCheckedBoxes = function () {
@@ -595,7 +610,7 @@
                 <label for="lang_java">Java</label>
             </div>
             <div class="radio">    
-                <input type="radio" id="lang_pyth" name="lang_choice" class="lang_choice">
+                <input type="radio" id="lang_python" name="lang_choice" class="lang_choice">
                 <label for="lang_python">Python</label>
             </div>
             <div class="radio">    
@@ -613,6 +628,10 @@
             <div class="radio">    
                 <input type="radio" id="lang_vb6" name="lang_choice" class="lang_choice">
                 <label for="lang_vb6">VisualBasic 6</label>
+            </div>
+            <div class="checkbox">
+                <input type="checkbox" id="extra_language" name="extra_language" class="extra_language" />
+                <label for="extra_language">User-Defined Language</label>
             </div>
 
             <div class="form-row">
