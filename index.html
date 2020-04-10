@@ -84,36 +84,31 @@
 				$("#estimate_duration").val(duration.toFixed(2));
 			})
 			
+			$("#questionTable input").change(function(){
+				getCheckedBoxes();
+			})
+			
 			$("#lang_c").click()
             
-            $('#btn_result').click(function (){
-                getCheckedBoxes();
+            getCheckedBoxes();
                 
-            });
-        var getCheckedBoxes = function () {
-            var intResult = 0;
-            var q1 = parseInt($('input[name="q1"]:checked').val());
-            var q2 = parseInt($('input[name="q2"]:checked').val());
-            var q3 = parseInt($('input[name="q3"]:checked').val());
-            var q4 = parseInt($('input[name="q4"]:checked').val());
-            var q5 = parseInt($('input[name="q5"]:checked').val());
-            var q6 = parseInt($('input[name="q6"]:checked').val());
-            var q7 = parseInt($('input[name="q7"]:checked').val());
-            var q8 = parseInt($('input[name="q8"]:checked').val());
-            var q9 = parseInt($('input[name="q9"]:checked').val());
-            var q10 = parseInt($('input[name="q10"]:checked').val());
-            var q11 = parseInt($('input[name="q11"]:checked').val());
-            var q12 = parseInt($('input[name="q12"]:checked').val());
-            var q13 = parseInt($('input[name="q13"]:checked').val());
-            var q14 = parseInt($('input[name="q14"]:checked').val());
-            intResult = q1 + q2 + q3 + q4 + q5 + q6 + q7 + q8 + q9 + q10 + q11 + q12 + q13 + q14;
-            $('#tbl_result').html(intResult);
-        }
+            
+        
 
 
 
         });
-
+		
+		var getCheckedBoxes = function () {
+            var intResult = 0;
+            $('#questionTable input[type="radio"]:checked').each(function() {  
+				intResult += parseInt( this.value) 
+			});
+       
+            //intResult = q1 + q2 + q3 + q4 + q5 + q6 + q7 + q8 + q9 + q10 + q11 + q12 + q13 + q14;
+            $('#tbl_result').html(intResult);
+        }
+		
         function updateTotal() {
             //FP for info calc
             var totalSum = 0;
@@ -139,8 +134,10 @@
 
     <form>
         <fieldset class="mb-5">
-        <legend>Function Points for Info Domain Values</legend>
-        <table class="table-bordered">
+        
+        <div class='border p-5 bg-light'>
+		<legend>Function Points for Info Domain Values</legend>
+		<table class="table-striped border">
             <thead>
                 <tr>
                     <th class="text-center">Parameter</th>
@@ -207,14 +204,16 @@
                 </tr>
             </tbody>
         </table>
+		</div>
         </fieldset>
-
-        <div>
-            <h2>Step 2</h2>
-            <p>You have to find the complexity adjustment values based on responses to the questions below:</p>
-            <h3>Complexity Weighting Factors:</h3>
+	
+		<fieldset class="mb-5">
+        <div class='border p-5 bg-light'>
+            <!--<h2>Step 2</h2>
+            <p>You have to find the complexity adjustment values based on responses to the questions below:</p>-->
+			<legend>Complexity Weighting Factors</legend>
             <p>0 = No influence,   1 = Incidental,   2 = Moderate,   3 = Average,   4 = Significant,   5 = Essential</p>
-            <table>
+            <table id="questionTable">
                 <thead>
                     <tr>
                         <th>
@@ -248,7 +247,7 @@
                             1. Does the system require reliable backup and recovery?
                         </td>
                         <td>
-                            <input type="radio" id="q1_0" name="q1" value="0">
+                            <input checked type="radio" id="q1_0" name="q1" value="0">
                         </td>
                         <td>
                             <input type="radio" id="q1_1" name="q1" value="1">
@@ -271,7 +270,7 @@
                             2. Are data communications required?
                         </td>
                         <td>
-                            <input type="radio" id="q2_0" name="q2" value="0">
+                            <input checked type="radio" id="q2_0" name="q2" value="0">
                         </td>
                         <td>
                             <input type="radio" id="q2_1" name="q2" value="1">
@@ -294,7 +293,7 @@
                             3. Are there distributed processing functions?
                         </td>
                         <td>
-                            <input type="radio" id="q3_0" name="q3" value="0">
+                            <input checked type="radio" id="q3_0" name="q3" value="0">
                         </td>
                         <td>
                             <input type="radio" id="q3_1" name="q3" value="1">
@@ -317,7 +316,7 @@
                             4. Is performance critical?
                         </td>
                         <td>
-                            <input type="radio" id="q4_0" name="q4" value="0">
+                            <input checked type="radio" id="q4_0" name="q4" value="0">
                         </td>
                         <td>
                             <input type="radio" id="q4_1" name="q4" value="1">
@@ -340,7 +339,7 @@
                             5. Will the system run in an existing, heavily utilized operational environment?
                         </td>
                         <td>
-                            <input type="radio" id="q5_0" name="q5" value="0">
+                            <input checked type="radio" id="q5_0" name="q5" value="0">
                         </td>
                         <td>
                             <input type="radio" id="q5_1" name="q5" value="1">
@@ -363,7 +362,7 @@
                             6. Does the system require on-line data entry?
                         </td>
                         <td>
-                            <input type="radio" id="q6_0" name="q6" value="0">
+                            <input checked type="radio" id="q6_0" name="q6" value="0">
                         </td>
                         <td>
                             <input type="radio" id="q6_1" name="q6" value="1">
@@ -386,7 +385,7 @@
                             7. Does the on-line data entry require the input transaction to be built over multiple screens or operations?	
                         </td>
                         <td>
-                            <input type="radio" id="q7_0" name="q7" value="0">
+                            <input checked type="radio" id="q7_0" name="q7" value="0">
                         </td>
                         <td>
                             <input type="radio" id="q7_1" name="q7" value="1">
@@ -409,7 +408,7 @@
                             8. Are the master file updated on-line?
                         </td>
                         <td>
-                            <input type="radio" id="q8_0" name="q8" value="0">
+                            <input checked type="radio" id="q8_0" name="q8" value="0">
                         </td>
                         <td>
                             <input type="radio" id="q8_1" name="q8" value="1">
@@ -432,7 +431,7 @@
                             9. Are the inputs, outputs, files, or inquiries complex?
                         </td>
                         <td>
-                            <input type="radio" id="q9_0" name="q9" value="0">
+                            <input checked type="radio" id="q9_0" name="q9" value="0">
                         </td>
                         <td>
                             <input type="radio" id="q9_1" name="q9" value="1">
@@ -455,7 +454,7 @@
                             10. Is the internal processing complex?
                         </td>
                         <td>
-                            <input type="radio" id="q10_0" name="q10" value="0">
+                            <input checked type="radio" id="q10_0" name="q10" value="0">
                         </td>
                         <td>
                             <input type="radio" id="q10_1" name="q10" value="1">
@@ -477,7 +476,7 @@
                                 11. In the code designed to be reusable?
                             </td>
                             <td>
-                                <input type="radio" id="q11_0" name="q11" value="0">
+                                <input checked type="radio" id="q11_0" name="q11" value="0">
                             </td>
                             <td>
                                 <input type="radio" id="q11_1" name="q11" value="1">
@@ -499,7 +498,7 @@
                             12. Are conversion and installation included in the design?
                         </td>
                         <td>
-                            <input type="radio" id="q12_0" name="q12" value="0">
+                            <input checked type="radio" id="q12_0" name="q12" value="0">
                         </td>
                         <td>
                             <input type="radio" id="q12_1" name="q12" value="1">
@@ -521,7 +520,7 @@
                             13. Is the system designed for multiple installations in different organizations?
                         </td>
                         <td>
-                            <input type="radio" id="q13_0" name="q13" value="0">
+                            <input checked type="radio" id="q13_0" name="q13" value="0">
                         </td>
                         <td>
                             <input type="radio" id="q13_1" name="q13" value="1">
@@ -543,7 +542,7 @@
                             Is the application designed to facilitate change and ease of use by the user?
                         </td>
                         <td>
-                            <input type="radio" id="q14_0" name="q14" value="0">
+                            <input checked type="radio" id="q14_0" name="q14" value="0">
                         </td>
                         <td>
                             <input type="radio" id="q14_1" name="q14" value="1">
@@ -562,23 +561,23 @@
                         </td>
                     <tr>
                         <td>
-                            Result 
+                            <b class='float-right pr-3'>Result</b> 
                         </td>
-                        <td id="tbl_result">
+                        <td colspan="5" id="tbl_result">
                             
                         </td>
                     </tr>
                     
                 </tbody>
             </table>
-            <input type="button" name="btn_result" id="btn_result" value="Calculate" type="submit" />
+            <!--<input type="button" name="btn_result" id="btn_result" value="Calculate" type="submit" />-->
         </div>
+		</fieldset>
 
-        <br/>
-        <br/>
 
         <fieldset class="mb-5">
-            <legend>Language Choice</legend>
+			<div class='border p-5 bg-light'>
+			<legend>Language Choice</legend>
             <div class="radio">
                 <input type="radio" id="lang_c" name="lang_choice" class="lang_choice">
                 <label for="lang_c">C</label>
@@ -630,12 +629,13 @@
                     <input type="text" name="langresult_locfp" readonly id="langresult_locfp" />
                 </div>
               </div>
-
+			</div>
         </fieldset>
 
 		<fieldset class="mb-5">
+			<div class='border p-5 bg-light'>
 			<legend>Complexity Choice</legend>
-			<table class='table-bordered' width="376">
+			<table class="table-striped border" width="376">
 				<tbody>
 					<tr>
 						<th  width="129"> Software Project
@@ -715,6 +715,7 @@
 				<div class="col">
 				</div>
 			</div>	
+			</div>
 		</fieldset>
 
     </form>
