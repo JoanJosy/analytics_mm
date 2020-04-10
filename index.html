@@ -49,18 +49,88 @@
 		
         $(document).ready(function() {
             //Attach functionality to numerical changes
-            $("[id^=fp_num_]").change(function() {
+           //Files Complexity
+            $("[id=fp_num_files]").change(function() {
                 var parameterType = $(this).attr("id").split("fp_num_")[1];
                 var parameterValue = $(this).val();
-                var currentComplexity = parseInt($("input[name='fp_level']:checked").val());
+                var currentComplexity = parseInt($("input[name='fp_level_files']:checked").val());
+                $("#fp_" + parameterType + "_total").val(parameterValue * idfpComplexityTable[parameterType][currentComplexity]);
+
+                updateTotal();
+            });
+			
+			//Inputs complexity
+			$("[id=fp_num_inputs]").change(function() {
+                var parameterType = $(this).attr("id").split("fp_num_")[1];
+                var parameterValue = $(this).val();
+                var currentComplexity = parseInt($("input[name='fp_level_inputs']:checked").val());
+                $("#fp_" + parameterType + "_total").val(parameterValue * idfpComplexityTable[parameterType][currentComplexity]);
+
+                updateTotal();
+            });
+			
+			
+			//Inquiries Complexity
+			$("[id=fp_num_inquiries]").change(function() {
+                var parameterType = $(this).attr("id").split("fp_num_")[1];
+                var parameterValue = $(this).val();
+                var currentComplexity = parseInt($("input[name='fp_level_inquiries']:checked").val());
+                $("#fp_" + parameterType + "_total").val(parameterValue * idfpComplexityTable[parameterType][currentComplexity]);
+
+                updateTotal();
+            });
+			
+			
+			//Interfaces Complexity
+			$("[id=fp_num_externals]").change(function() {
+                var parameterType = $(this).attr("id").split("fp_num_")[1];
+                var parameterValue = $(this).val();
+                var currentComplexity = parseInt($("input[name='fp_level_interfaces']:checked").val());
+                $("#fp_" + parameterType + "_total").val(parameterValue * idfpComplexityTable[parameterType][currentComplexity]);
+
+                updateTotal();
+            });
+			
+			
+			//Output complexity
+			$("[id=fp_num_outputs]").change(function() {
+                var parameterType = $(this).attr("id").split("fp_num_")[1];
+                var parameterValue = $(this).val();
+                var currentComplexity = parseInt($("input[name='fp_level_outputs']:checked").val());
                 $("#fp_" + parameterType + "_total").val(parameterValue * idfpComplexityTable[parameterType][currentComplexity]);
 
                 updateTotal();
             });
 
             
-            $(".fp_level").click(function() {
-                $("[id^=fp_num").trigger("change");
+			//files trigger change
+            $(".fp_level_files").click(function() {
+                $("[id=fp_num_files").trigger("change");
+                updateTotal();
+            });
+			
+			//input trigger change
+			 $(".fp_level_inputs").click(function() {
+                $("[id=fp_num_inputs").trigger("change");
+                updateTotal();
+            });
+			
+			//inquiries trigger change
+			 $(".fp_level_inquiries").click(function() {
+                $("[id=fp_num_inquiries").trigger("change");
+                updateTotal();
+            });
+			
+			
+			//Interface trigger Change
+			 $(".fp_level_interfaces").click(function() {
+                $("[id=fp_num_externals").trigger("change");
+                updateTotal();
+            });
+			
+			//Output trigger changes			
+			 $(".fp_level_outputs").click(function() {
+                $("[id=fp_num_outputs").trigger("change");
                 updateTotal();
             });
 
@@ -152,27 +222,28 @@
         
         <div class='border p-5 bg-light'>
 		<legend>Function Points for Info Domain Values</legend>
-		<table class="table-striped border">
-            <thead>
+       <table class="table-striped border">           
+            <tbody>
+	     <thead>
                 <tr>
                     <th class="text-center">Parameter</th>
                     <th class="text-center">Count</th>
                     <th class="text-center">
                         <label for="fp_simple">Simple</label>
-                        <input id="fp_simple" class="fp_level" checked name="fp_level" value="0" type="radio" />
+                        <input id="fp_simple" class="fp_level_inputs" checked name="fp_level_inputs" value="0" type="radio" />
                     </th>
                     <th class="text-center">
                         <label for="fp_average">Average</label>
-                        <input id="fp_average" class="fp_level" name="fp_level" value="1" type="radio" />
+                        <input id="fp_average" class="fp_level_inputs" name="fp_level_inputs" value="1" type="radio" />
                     </th>
                     <th class="text-center">
                         <label for="fp_complex">Complex</label>
-                        <input id="fp_complex" class="fp_level" name="fp_level" value="2" type="radio" />
+                        <input id="fp_complex" class="fp_level_inputs" name="fp_level_inputs" value="2" type="radio" />
                     </th>
                     <th class="text-center">Total</th>
                 </tr>
             </thead>
-            <tbody>
+			
                 <tr>
                     <td># user inputs</td>
                     <td><input id="fp_num_inputs" type="number" min="0" value="0" /></td>
@@ -181,6 +252,27 @@
                     <td class="text-center">x6</td>
                     <td><input id="fp_inputs_total" value="0" class="fp_total text-center" readonly type="text" min="0" /></td>
                 </tr>
+				
+				 <thead>
+                <tr>
+                    <th class="text-center"></th>
+                    <th class="text-center"></th>
+                    <th class="text-center">
+                        <label for="fp_simple"></label>
+                        <input id="fp_simple" class="fp_level_outputs" checked name="fp_level_outputs" value="0" type="radio" />
+                    </th>
+                    <th class="text-center">
+                        <label for="fp_average"></label>
+                        <input id="fp_average" class="fp_level_outputs" name="fp_level_outputs" value="1" type="radio" />
+                    </th>
+                    <th class="text-center">
+                        <label for="fp_complex"></label>
+                        <input id="fp_complex" class="fp_level_outputs" name="fp_level_outputs" value="2" type="radio" />
+                    </th>
+                    <th class="text-center"></th>
+                </tr>
+            </thead>
+				
                 <tr>
                     <td># user outputs</td>
                     <td><input id="fp_num_outputs" type="number" min="0" value="0" /></td>
@@ -189,6 +281,27 @@
                     <td class="text-center">x7</td>
                     <td><input id="fp_outputs_total" value="0" class="fp_total text-center" readonly type="text" min="0" /></td>
                 </tr>
+				
+				 <thead>
+                <tr>
+                    <th class="text-center"></th>
+                    <th class="text-center"></th>
+                    <th class="text-center">
+                        <label for="fp_simple"></label>
+                        <input id="fp_simple" class="fp_level_inquiries" checked name="fp_level_inquiries" value="0" type="radio" />
+                    </th>
+                    <th class="text-center">
+                        <label for="fp_average"></label>
+                        <input id="fp_average" class="fp_level_inquiries" name="fp_level_inquiries" value="1" type="radio" />
+                    </th>
+                    <th class="text-center">
+                        <label for="fp_complex"></label>
+                        <input id="fp_complex" class="fp_level_inquiries" name="fp_level_inquiries" value="2" type="radio" />
+                    </th>
+                    <th class="text-center"></th>
+                </tr>
+            </thead>
+			
                 <tr>
                     <td># user inquiries</td>
                     <td><input id="fp_num_inquiries" type="number" min="0" value="0" /></td>
@@ -197,6 +310,27 @@
                     <td class="text-center">x6</td>
                     <td><input id="fp_inquiries_total" value="0" class="fp_total text-center" readonly type="text" min="0" /></td>
                 </tr>
+				
+				 <thead>
+                <tr>
+                    <th class="text-center"></th>
+                    <th class="text-center"></th>
+                    <th class="text-center">
+                        <label for="fp_simple"></label>
+                        <input id="fp_simple" class="fp_level_files" checked name="fp_level_files" value="0" type="radio" />
+                    </th>
+                    <th class="text-center">
+                        <label for="fp_average"></label>
+                        <input id="fp_average" class="fp_level_files" name="fp_level_files" value="1" type="radio" />
+                    </th>
+                    <th class="text-center">
+                        <label for="fp_complex"></label>
+                        <input id="fp_complex" class="fp_level_files" name="fp_level_files" value="2" type="radio" />
+                    </th>
+                    <th class="text-center"></th>
+                </tr>
+            </thead>
+				
                 <tr>
                     <td># files</td>
                     <td><input id="fp_num_files" type="number" min="0" value="0" /></td>
@@ -205,6 +339,27 @@
                     <td class="text-center">x15</td>
                     <td><input id="fp_files_total" value="0" class="fp_total text-center" readonly type="text" min="0" /></td>
                 </tr>
+				
+				 <thead>
+                <tr>
+                    <th class="text-center"></th>
+                    <th class="text-center"></th>
+                    <th class="text-center">
+                        <label for="fp_simple"></label>
+                        <input id="fp_simple" class="fp_level_interfaces" checked name="fp_level_interfaces" value="0" type="radio" />
+                    </th>
+                    <th class="text-center">
+                        <label for="fp_average"></label>
+                        <input id="fp_average" class="fp_level_interfaces" name="fp_level_interfaces" value="1" type="radio" />
+                    </th>
+                    <th class="text-center">
+                        <label for="fp_complex"></label>
+                        <input id="fp_complex" class="fp_level_interfaces" name="fp_level_interfaces" value="2" type="radio" />
+                    </th>
+                    <th class="text-center"></th>
+                </tr>
+            </thead>
+				
                 <tr>
                     <td># external interfaces</td>
                     <td><input id="fp_num_externals" type="number" min="0" value="0" /></td>
